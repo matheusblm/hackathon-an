@@ -15,7 +15,7 @@ export class ReviewsController {
 
   @Post('create/:userId')
   create(@Body() createReviewDto: any, @Param('userId') userId: string) {
-    return this.reviewsService.create(userId, createReviewDto);
+    return this.reviewsService.create(+userId, createReviewDto);
   }
 
   @Get()

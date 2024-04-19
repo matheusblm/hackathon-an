@@ -22,7 +22,7 @@ CREATE TABLE `Review` (
     `description` VARCHAR(191) NOT NULL,
     `userId` INTEGER NOT NULL,
     `isReviewed` BOOLEAN NOT NULL DEFAULT false,
-    `points` INTEGER NOT NULL DEFAULT 10,
+    `points` INTEGER NOT NULL DEFAULT 2,
     `fileId` INTEGER NULL,
 
     PRIMARY KEY (`id`)
@@ -34,6 +34,7 @@ CREATE TABLE `ReviewAudit` (
     `accept` BOOLEAN NOT NULL,
     `comment` VARCHAR(191) NOT NULL,
     `reviewId` INTEGER NOT NULL,
+    `userId` INTEGER NOT NULL,
     `points` INTEGER NOT NULL DEFAULT 5,
 
     PRIMARY KEY (`id`)
@@ -72,6 +73,9 @@ ALTER TABLE `Review` ADD CONSTRAINT `Review_userId_fkey` FOREIGN KEY (`userId`) 
 
 -- AddForeignKey
 ALTER TABLE `Review` ADD CONSTRAINT `Review_fileId_fkey` FOREIGN KEY (`fileId`) REFERENCES `File`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `ReviewAudit` ADD CONSTRAINT `ReviewAudit_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `ReviewAudit` ADD CONSTRAINT `ReviewAudit_reviewId_fkey` FOREIGN KEY (`reviewId`) REFERENCES `Review`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

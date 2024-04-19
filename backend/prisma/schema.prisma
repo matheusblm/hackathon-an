@@ -8,18 +8,19 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  password  String
-  sex       String
-  age       Int
-  education String
-  country   String
-  city      String
-  state     String
-  reviews   Review[]
-  score     Int      @default(0)
-  level     String   @default("Historiador Iniciante")
+  id          Int           @id @default(autoincrement())
+  name        String
+  password    String
+  sex         String
+  age         Int
+  education   String
+  country     String
+  city        String
+  state       String
+  reviews     Review[]
+  score       Int           @default(0)
+  level       String        @default("Historiador Iniciante")
+  ReviewAudit ReviewAudit[]
 }
 
 model Review {
@@ -42,6 +43,8 @@ model ReviewAudit {
   accept   Boolean
   comment  String
   reviewId Int
+  userId   Int
+  user     User    @relation(fields: [userId], references: [id])
   review   Review  @relation(fields: [reviewId], references: [id])
   points   Int     @default(5)
 }

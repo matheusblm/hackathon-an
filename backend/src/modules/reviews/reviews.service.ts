@@ -5,12 +5,31 @@ import { PrismaService } from 'src/database/prisma.service';
 export class ReviewsService {
   constructor(private prisma: PrismaService) {}
 
-  async create(userId: any, data: any): Promise<any> {
+  async create(userId: number, data: any): Promise<any> {
     const review = await this.prisma.review.create({
       data: {
         ...data,
+        tags: {
+          create: data.tags,
+        },
+        comments: {
+          create: data.comments,
+        },
+        isReviewed: false,
         userId,
         points: 2,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            score: true,
+          },
+        },
+        file: true,
+        tags: true,
+        comments: true,
       },
     });
 
@@ -25,10 +44,17 @@ export class ReviewsService {
   findAll(): Promise<any> {
     return this.prisma.review.findMany({
       include: {
-        user: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            score: true,
+          },
+        },
         file: true,
         tags: true,
         comments: true,
+        reviewAudits: true,
       },
     });
   }
@@ -37,10 +63,17 @@ export class ReviewsService {
     return this.prisma.review.findUnique({
       where: { id },
       include: {
-        user: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            score: true,
+          },
+        },
         file: true,
         tags: true,
         comments: true,
+        reviewAudits: true,
       },
     });
   }
@@ -50,10 +83,17 @@ export class ReviewsService {
       where: { id },
       data,
       include: {
-        user: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            score: true,
+          },
+        },
         file: true,
         tags: true,
         comments: true,
+        reviewAudits: true,
       },
     });
   }

@@ -12,6 +12,9 @@ export class TagsService {
   }): Promise<any> {
     return this.prisma.tag.create({
       data,
+      include: {
+        review: true,
+      },
     });
   }
 

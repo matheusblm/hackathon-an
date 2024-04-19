@@ -13,9 +13,17 @@ import { ReviewAuditsService } from './review-audits.service';
 export class ReviewAuditsController {
   constructor(private readonly reviewAuditsService: ReviewAuditsService) {}
 
-  @Post()
-  create(@Body() createReviewAuditDto: any) {
-    return this.reviewAuditsService.create(createReviewAuditDto);
+  @Post('create/:userId/:reviewId')
+  create(
+    @Body() createReviewAuditDto: any,
+    @Param('userId') userId: string,
+    @Param('reviewId') reviewId: string,
+  ) {
+    return this.reviewAuditsService.create(
+      createReviewAuditDto,
+      +reviewId,
+      +userId,
+    );
   }
 
   @Get()

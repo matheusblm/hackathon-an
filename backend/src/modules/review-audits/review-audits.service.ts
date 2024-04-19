@@ -5,33 +5,45 @@ import { PrismaService } from 'src/database/prisma.service';
 export class ReviewAuditsService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: {
-    reviewId: number;
-    accept: boolean;
-    comment: string;
-    userId: number;
-  }): Promise<any> {
+  async create(
+    data: {
+      accept: boolean;
+      comment: string;
+    },
+    reviewId: number,
+    userId: number,
+  ): Promise<any> {
     const reviewAudit = await this.prisma.reviewAudit.create({
       data: {
         ...data,
+        reviewId,
+        userId,
         points: 5,
+      },
+      include: {
+        review: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            score: true,
+          },
+        },
       },
     });
 
     await this.prisma.user.update({
-      where: { id: data.userId },
+      where: { id: userId },
       data: { score: { increment: reviewAudit.points } },
     });
 
-    return reviewAudit;
-
     const auditCount = await this.prisma.reviewAudit.count({
-      where: { reviewId: data.reviewId, accept: true },
+      where: { reviewId, accept: true },
     });
 
     if (auditCount >= 5) {
       await this.prisma.review.update({
-        where: { id: data.reviewId },
+        where: { id: reviewId },
         data: { isReviewed: true },
       });
     }
@@ -40,12 +52,33 @@ export class ReviewAuditsService {
   }
 
   findAll(): Promise<any[]> {
-    return this.prisma.reviewAudit.findMany();
+    return this.prisma.reviewAudit.findMany({
+      include: {
+        review: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            score: true,
+          },
+        },
+      },
+    });
   }
 
   findOne(id: number): Promise<any> {
     return this.prisma.reviewAudit.findUnique({
       where: { id },
+      include: {
+        review: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            score: true,
+          },
+        },
+      },
     });
   }
 
@@ -53,6 +86,16 @@ export class ReviewAuditsService {
     return this.prisma.reviewAudit.update({
       where: { id },
       data,
+      include: {
+        review: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            score: true,
+          },
+        },
+      },
     });
   }
 
