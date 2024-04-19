@@ -18,6 +18,8 @@ model User {
   city      String
   state     String
   reviews   Review[]
+  score     Int      @default(0)
+  level     String   @default("Historiador Iniciante")
 }
 
 model Review {
@@ -31,6 +33,7 @@ model Review {
   comments     Comment[]
   reviewAudits ReviewAudit[]
   isReviewed   Boolean       @default(false)
+  points       Int           @default(10) // Exemplo de pontos atribuídos por review
   fileId       Int?
 }
 
@@ -40,6 +43,7 @@ model ReviewAudit {
   comment  String
   reviewId Int
   review   Review  @relation(fields: [reviewId], references: [id])
+  points   Int     @default(5) // Exemplo de pontos atribuídos por auditoria
 }
 
 model File {

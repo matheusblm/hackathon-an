@@ -5,13 +5,13 @@ import { PrismaService } from 'src/database/prisma.service';
 export class TagsService {
   constructor(private prisma: PrismaService) {}
 
-  create(reviewId: number, name: string, value: string): Promise<any> {
+  create(data: {
+    reviewId: number;
+    name: string;
+    value: string;
+  }): Promise<any> {
     return this.prisma.tag.create({
-      data: {
-        reviewId,
-        name,
-        value,
-      },
+      data,
     });
   }
 

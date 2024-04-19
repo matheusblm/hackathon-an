@@ -5,7 +5,22 @@ import { PrismaService } from 'src/database/prisma.service';
 export class ReviewsService {
   constructor(private prisma: PrismaService) {}
 
-  create(userId: any, data: any): Promise<any> {
+  async create(userId: any, data: any): Promise<any> {
+    const review = await this.prisma.review.create({
+      data: {
+        ...data,
+        userId,
+        points: 2,
+      },
+    });
+
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { score: { increment: review.points } },
+    });
+
+    return review;
+
     return this.prisma.review.create({
       data: {
         ...data,

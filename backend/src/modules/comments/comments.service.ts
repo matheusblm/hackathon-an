@@ -5,12 +5,9 @@ import { PrismaService } from 'src/database/prisma.service';
 export class CommentsService {
   constructor(private prisma: PrismaService) {}
 
-  create(reviewId: number, text: string): Promise<any> {
+  create(data: { reviewId: number; text: string }): Promise<any> {
     return this.prisma.comment.create({
-      data: {
-        reviewId,
-        text,
-      },
+      data,
     });
   }
 

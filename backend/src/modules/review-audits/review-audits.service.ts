@@ -9,10 +9,21 @@ export class ReviewAuditsService {
     reviewId: number;
     accept: boolean;
     comment: string;
+    userId: number;
   }): Promise<any> {
     const reviewAudit = await this.prisma.reviewAudit.create({
-      data,
+      data: {
+        ...data,
+        points: 5,
+      },
     });
+
+    await this.prisma.user.update({
+      where: { id: data.userId },
+      data: { score: { increment: reviewAudit.points } },
+    });
+
+    return reviewAudit;
 
     const auditCount = await this.prisma.reviewAudit.count({
       where: { reviewId: data.reviewId, accept: true },

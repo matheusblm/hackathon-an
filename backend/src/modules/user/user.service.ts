@@ -35,4 +35,12 @@ export class UsersService {
       where: { id },
     });
   }
+
+  findAllRanked(): Promise<any[]> {
+    return this.prisma.user.findMany({
+      orderBy: {
+        score: 'desc',
+      },
+    });
+  }
 }
