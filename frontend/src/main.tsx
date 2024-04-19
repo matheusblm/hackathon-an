@@ -1,21 +1,24 @@
+// main.tsx
 import React from "react";
-import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./index.css";
-import { Root } from "./routes/root";
-import { ChakraProvider } from "@chakra-ui/react";
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Root from './routes/root';
+import CadastroForm from './components/CadastroForm';
+import LoginForm from './components/LoginForm';
+import { ChakraProvider } from '@chakra-ui/react';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-  },
-]);
-
-ReactDOM.createRoot(document.getElementById("root")!).render(
+createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ChakraProvider>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Root>
+          <Routes>
+            <Route path="/cadastro" element={<CadastroForm />} />
+            <Route exact path="/" element={<LoginForm />} />
+          </Routes>
+        </Root>
+      </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>
 );
+

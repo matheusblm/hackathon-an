@@ -1,45 +1,12 @@
+import React from 'react';
 
-export const Root = () => {
-    return (
-      <>
-        <div id="sidebar">
-          <h1>React Router Contacts</h1>
-          <div>
-            <form id="search-form" role="search">
-              <input
-                id="q"
-                aria-label="Search contacts"
-                placeholder="Search"
-                type="search"
-                name="q"
-              />
-              <div
-                id="search-spinner"
-                aria-hidden
-                hidden={true}
-              />
-              <div
-                className="sr-only"
-                aria-live="polite"
-              >
+const Root = ({ children }) => {
+  return (
+    <div>
+      <h1>Minha Aplicação</h1>
+      {children}
+    </div>
+  );
+};
 
-              </div>
-            </form>
-            <form method="post">
-            </form>
-          </div>
-          <nav>
-            <ul>
-              <li>
-                <a href={`/contacts/1`}>Your Name</a>
-              </li>
-              <li>
-                <a href={`/contacts/2`}>Your Friend</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div id="detail"></div>
-      </>
-    );
-  }
+export default Root;
