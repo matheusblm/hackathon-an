@@ -1,4 +1,13 @@
-import { Box, Image, Text, Progress, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Text,
+  Progress,
+  VStack,
+  Button,
+  Flex,
+} from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 function ArchivesPage() {
   const archives = [
@@ -21,6 +30,8 @@ function ArchivesPage() {
       reviews: 1,
     },
   ];
+
+  const navigate = useNavigate();
 
   return (
     <Box p={5}>
@@ -47,6 +58,15 @@ function ArchivesPage() {
               size="md"
               value={(archive.reviews / 5) * 100}
             />
+            <Flex justifyContent="end">
+              <Button
+                colorScheme="blue"
+                onClick={() => navigate(`/acervos/${archive.id}`)}
+                mt={5}
+              >
+                Ver Detalhes
+              </Button>
+            </Flex>
           </Box>
         ))}
       </VStack>
