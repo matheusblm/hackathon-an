@@ -1,11 +1,12 @@
-import { Box, Flex, Heading, Link, Spacer } from "@chakra-ui/react";
+import { Box, Flex, Link, Spacer, Image } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
+import ImageLogo from "../../assets/BlidioSecond.png";
 
 function HeaderComponent() {
   return (
     <Box bg="blue.500" p={4} color="white">
       <Flex align="center" maxW="1200px" mx="auto">
-        <Heading size="lg">Minha Aplicação</Heading>
+        <Image src={ImageLogo} alt="Logo" w={100} h={75} />
         <Spacer />
         <Link
           as={RouterLink}

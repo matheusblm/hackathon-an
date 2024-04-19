@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   FormControl,
   FormLabel,
@@ -11,6 +11,7 @@ import {
   SimpleGrid,
   Box,
   Flex,
+  Text,
 } from "@chakra-ui/react";
 import { api } from "../../service/api";
 
@@ -91,7 +92,10 @@ function MyRegister() {
   };
 
   return (
-    <FormControl as="form" onSubmit={handleSubmit}>
+    <FormControl as="form" onSubmit={handleSubmit} p={10}>
+      <Text fontSize="2xl" mb={3}>
+        Meu Cadastro
+      </Text>
       <SimpleGrid columns={2} spacing={10} p={10}>
         <Box>
           <FormLabel htmlFor="name">Nome</FormLabel>
@@ -113,7 +117,7 @@ function MyRegister() {
           />
         </Box>
         <Box>
-          <FormLabel htmlFor="sex">Sex</FormLabel>
+          <FormLabel htmlFor="sex">Gênero</FormLabel>
           <Select id="sex" name="sex" value={user.sex} onChange={handleChange}>
             <option value="Male">Homem</option>
             <option value="Female">Mulher</option>
@@ -169,6 +173,16 @@ function MyRegister() {
             value={user.state}
             onChange={handleChange}
           />
+        </Box>
+
+        <Box>
+          <FormLabel htmlFor="state">Categorias de interesse</FormLabel>
+          <Select>
+            <option>História Brasileira</option>
+            <option>Novela</option>
+            <option>Futebol</option>
+            <option>Ciência</option>
+          </Select>
         </Box>
       </SimpleGrid>
       <Flex justifyContent="end">

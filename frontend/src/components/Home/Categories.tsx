@@ -1,14 +1,14 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 
 function Categories() {
-  const categories = ["História", "Arte", "Ciência", "Tecnologia"];
+  const categories = ["História", "Arte", "Ciência", "Novelas", "Futebol"];
 
   return (
-    <Box>
+    <Box w="100%">
       <Text fontSize="2xl" mb={3}>
         Categorias
       </Text>
-      <Flex gridGap="10px">
+      <Flex gridGap="10px" justifyContent="center">
         {categories.map((category) => (
           <Button
             key={category}

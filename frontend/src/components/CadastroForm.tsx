@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const CadastroForm = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +12,7 @@ const CadastroForm = () => {
     senha: "",
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({
@@ -20,6 +21,7 @@ const CadastroForm = () => {
     });
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = (e: any) => {
     e.preventDefault();
     console.log(formData);

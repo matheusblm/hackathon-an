@@ -1,31 +1,37 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
-import axios from "axios"; 
+import axios from "axios";
 
 function ReviewForm() {
   const [description, setDescription] = useState("");
   const [comment, setComment] = useState("");
   const [generatedDescription, setGeneratedDescription] = useState("");
 
-  const handleDescriptionChange = (event) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleDescriptionChange = (event: any) => {
     setDescription(event.target.value);
   };
 
-  const handleCommentChange = (event) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleCommentChange = (event: any) => {
     setComment(event.target.value);
   };
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post("https://api.textcortex.com/v1/texts/rewritings", {
-        description: description,
-        max_tokens: 50, 
-      }, {
-        headers: {
-          "Authorization": `gAAAAABmIsT9VXeWGesUmnZndvqXWKQz0rSVsykmVpN1Xc6BPAhLIpdRIFEFMwYDVzWtk7NBesUolNdEfoHrDOCfN9sIM_C_NWoxykeJWTC-0p3LEuEBxTE_xdQjVE-Qv3lxhAUogdfz`, 
-          "Content-Type": "application/json",
+      const response = await axios.post(
+        "https://api.textcortex.com/v1/texts/rewritings",
+        {
+          description: description,
+          max_tokens: 50,
         },
-      });
+        {
+          headers: {
+            Authorization: `gAAAAABmIsT9VXeWGesUmnZndvqXWKQz0rSVsykmVpN1Xc6BPAhLIpdRIFEFMwYDVzWtk7NBesUolNdEfoHrDOCfN9sIM_C_NWoxykeJWTC-0p3LEuEBxTE_xdQjVE-Qv3lxhAUogdfz`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       setGeneratedDescription(response.data.choices[0].text.trim());
     } catch (error) {
@@ -46,9 +52,9 @@ function ReviewForm() {
       </FormControl>
       <FormControl mt={4}>
         <FormLabel htmlFor="comment">Comentário</FormLabel>
-        <Input 
-          id="comment" 
-          type="text" 
+        <Input
+          id="comment"
+          type="text"
           value={comment}
           onChange={handleCommentChange}
         />

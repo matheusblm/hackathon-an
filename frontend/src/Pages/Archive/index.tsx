@@ -8,25 +8,28 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import imageOne from "../../assets/BR_RJANRIO_O2_0_FOT_0027_d0001de0001_page-0001.jpg";
+import imageTwo from "../../assets/BR_RJANRIO_ON_0_FOT_0053_d0001de0001_page-0001.jpg";
+import imagethree from "../../assets/BR_RJANRIO_O2_0_FOT_0465_d0001de0001_page-0001.jpg";
 
 function ArchivesPage() {
   const archives = [
     {
       id: 1,
-      title: "Arte Medieval",
-      imageUrl: "/path-to-image-1.jpg",
+      title: "História",
+      imageUrl: imageOne,
       reviews: 3,
     },
     {
       id: 2,
-      title: "Manuscritos Antigos",
-      imageUrl: "/path-to-image-2.jpg",
+      title: "Ciência",
+      imageUrl: imageTwo,
       reviews: 5,
     },
     {
       id: 3,
-      title: "Invenções do Renascimento",
-      imageUrl: "/path-to-image-3.jpg",
+      title: "Arte",
+      imageUrl: imagethree,
       reviews: 1,
     },
   ];
@@ -51,6 +54,7 @@ function ArchivesPage() {
               boxSize="sm"
               objectFit="cover"
               mb={2}
+              w={"100%"}
             />
             <Text fontSize="lg">{archive.title}</Text>
             <Progress
