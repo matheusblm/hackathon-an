@@ -5,8 +5,10 @@ import {
   Select,
   FormControl,
   FormLabel,
+  Button,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import axios from "axios";
 
 function ArchiveItemPage() {
   const optionLabels = [
@@ -38,6 +40,27 @@ function ArchiveItemPage() {
     newOptions[index] = value;
     setSelectedOptions(newOptions);
   };
+  const [generatedText, setGeneratedText] = useState(""); // Estado para armazenar o texto gerado
+
+  // Função para enviar os options selecionados para a API e trazer a resposta
+  const handleGenerateText = async () => {
+    try {
+      const response = await axios.post("https://api.textcortex.com/v1/texts/rewritings", {
+          data: {
+            options: selectedOptions,
+            text: ["Texto de exemplo"],
+          },
+      }, {
+        headers: {
+          "Authorization": "143047600372-omft59ta24tjq3c31c00jat5uabljlp8.apps.googleusercontent.com", // Substitua pela sua chave de API
+          "Content-Type": "application/json",
+        },
+      });
+      setGeneratedText(response.data.choices[0].text.trim());
+    } catch (error) {
+      console.error("Erro ao enviar opções:", error);
+    }
+  };
 
   return (
     <Flex p={5} align="center">
@@ -67,6 +90,17 @@ function ArchiveItemPage() {
               </Select>
             </Box>
           ))}
+           {/* Botão para gerar o texto com base nas opções selecionadas */}
+           <Button mt={4} colorScheme="green" onClick={handleGenerateText}>
+            Gerar Texto com Base nas Opções
+          </Button>
+          {/* Exibir o texto gerado */}
+          {generatedText && (
+            <Box mt={4}>
+              <strong>Texto Gerado:</strong>
+              <p>{generatedText}</p>
+            </Box>
+          )}
         </FormControl>
       </Box>
     </Flex>
