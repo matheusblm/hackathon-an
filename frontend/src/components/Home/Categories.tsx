@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 
 function Categories() {
   const categories = ["História", "Arte", "Ciência", "Tecnologia"];
@@ -8,9 +8,9 @@ function Categories() {
       <Text fontSize="2xl" mb={3}>
         Categorias
       </Text>
-      <SimpleGrid columns={2} spacing={5}>
+      <Flex gridGap="10px">
         {categories.map((category) => (
-          <Box
+          <Button
             key={category}
             p={5}
             shadow="md"
@@ -18,9 +18,9 @@ function Categories() {
             borderRadius="lg"
           >
             {category}
-          </Box>
+          </Button>
         ))}
-      </SimpleGrid>
+      </Flex>
     </Box>
   );
 }
