@@ -17,12 +17,12 @@ function ReviewForm() {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post("https://api.openai.com/v1/engines/text-davinci-003/completions", {
+      const response = await axios.post("https://api.textcortex.com/v1/texts/rewritings", {
         description: description,
         max_tokens: 50, 
       }, {
         headers: {
-          "Authorization": `API_KEY`, 
+          "Authorization": `gAAAAABmIsT9VXeWGesUmnZndvqXWKQz0rSVsykmVpN1Xc6BPAhLIpdRIFEFMwYDVzWtk7NBesUolNdEfoHrDOCfN9sIM_C_NWoxykeJWTC-0p3LEuEBxTE_xdQjVE-Qv3lxhAUogdfz`, 
           "Content-Type": "application/json",
         },
       });
