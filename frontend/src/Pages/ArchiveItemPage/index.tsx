@@ -7,6 +7,7 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import imageTwo from "../../assets/BR_RJANRIO_O2_0_FOT_0184_d0001de0001_page-0001.jpg";
 
 function ArchiveItemPage() {
   const optionLabels = [
@@ -21,7 +22,17 @@ function ArchiveItemPage() {
   ];
   const optionArrays = [
     ["Mulher", "Homem", "Transexual"],
-    ["Movimento Feminista", "Movimento Negro", "Movimento Estudantil", "Movimento Estudantil","Movimento Operário","Movimento Ambientalista","Movimento LGBTQIA+","Movimentos indígenas","Movimentos de Trabalhadores de diversos setores"],
+    [
+      "Movimento Feminista",
+      "Movimento Negro",
+      "Movimento Estudantil",
+      "Movimento Estudantil",
+      "Movimento Operário",
+      "Movimento Ambientalista",
+      "Movimento LGBTQIA+",
+      "Movimentos indígenas",
+      "Movimentos de Trabalhadores de diversos setores",
+    ],
     ["Urbano", "Rural"],
     ["Pardos", "Branco", "Negros", "indígenos", "amarelos"],
     ["Cultura LGBTQ", "Cultura Afrodescendentes", "CulturaIndigena"],
@@ -42,12 +53,7 @@ function ArchiveItemPage() {
   return (
     <Flex p={5} align="center">
       <Box flex="1" mr={5}>
-        <Image
-          src="/path-to-large-image.jpg"
-          alt="Documento Grande"
-          boxSize="500px"
-          objectFit="contain"
-        />
+        <Image src={imageTwo} alt="Documento Grande" objectFit="contain" />
       </Box>
       <Box flex="1">
         <FormControl>
@@ -70,7 +76,6 @@ function ArchiveItemPage() {
         </FormControl>
       </Box>
     </Flex>
-    
   );
 }
 

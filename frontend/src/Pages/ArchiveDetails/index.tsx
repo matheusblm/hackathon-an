@@ -40,7 +40,11 @@ function ArchiveDetailsPage() {
             <Button
               colorScheme="blue"
               mt={3}
-              onClick={() => navigate(`/acervos/${archiveId}/${item.imageUrl}`)}
+              onClick={() =>
+                navigate(
+                  `/acervos/${archiveId}/${item.imageUrl.split("/").pop()}`
+                )
+              }
             >
               Ver Arquivo
             </Button>
