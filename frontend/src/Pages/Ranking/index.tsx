@@ -10,7 +10,7 @@ function RankingPage() {
   const sortedUsers = users.sort((a, b) => b.score - a.score);
 
   return (
-    <Box p={5}>
+    <Box p={5} w="100%">
       <Text fontSize="2xl" mb={3}>
         Ranking de Usuários
       </Text>
