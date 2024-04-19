@@ -6,8 +6,39 @@ import {
   FormControl,
   FormLabel,
 } from "@chakra-ui/react";
+import { useState } from "react";
 
 function ArchiveItemPage() {
+  const optionLabels = [
+    "Gênero",
+    "Movimento social",
+    "Regionaidade",
+    "Etnia",
+    "Cultura",
+    "Temas sociais",
+    "Temas inclusivos",
+    "Temas variaveis",
+  ];
+  const optionArrays = [
+    ["Mulher", "Homem", "Transexual"],
+    ["Movimento Feminista", "Movimento Negro", "Movimento Estudantil", "Movimento Estudantil","Movimento Operário","Movimento Ambientalista","Movimento LGBTQIA+","Movimentos indígenas","Movimentos de Trabalhadores de diversos setores"],
+    ["Urbano", "Rural"],
+    ["Pardos", "Branco", "Negros", "indígenos", "amarelos"],
+    ["Cultura LGBTQ", "Cultura Afrodescendentes", "CulturaIndigena"],
+    ["Empoderamento", "Liderança Feminina", "Respeito"],
+    ["Inclusão", "Adaptacao", "Acessibilidade"],
+    ["Esporte", "politíca", "educação", "música", "cinema", "teatro"],
+  ];
+
+  const [selectedOptions, setSelectedOptions] = useState(Array(8).fill(""));
+
+  // Função para atualizar a opção selecionada
+  const handleOptionChange = (index, value) => {
+    const newOptions = [...selectedOptions];
+    newOptions[index] = value;
+    setSelectedOptions(newOptions);
+  };
+
   return (
     <Flex p={5} align="center">
       <Box flex="1" mr={5}>
@@ -20,19 +51,26 @@ function ArchiveItemPage() {
       </Box>
       <Box flex="1">
         <FormControl>
-          {[...Array(8)].map((_, index) => (
+          {selectedOptions.map((option, index) => (
             <Box key={index} mb={4}>
-              <FormLabel>{`Opção ${index + 1}`}</FormLabel>
-              <Select placeholder={`Selecione a opção ${index + 1}`}>
-                <option>Opção A</option>
-                <option>Opção B</option>
-                <option>Opção C</option>
+              <FormLabel>{optionLabels[index]}</FormLabel>
+              <Select
+                placeholder={`Selecione ${optionLabels[index]}`}
+                value={option}
+                onChange={(e) => handleOptionChange(index, e.target.value)}
+              >
+                {optionArrays[index].map((opt, i) => (
+                  <option key={i} value={opt}>
+                    {opt}
+                  </option>
+                ))}
               </Select>
             </Box>
           ))}
         </FormControl>
       </Box>
     </Flex>
+    
   );
 }
 
