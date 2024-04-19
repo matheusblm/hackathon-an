@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  password  String
+  sex       String
+  age       Int
+  education String
+  country   String
+  city      String
+  state     String
+  reviews   Review[]
+}
+
+model Review {
+  id           Int           @id @default(autoincrement())
+  createdAt    DateTime      @default(now())
+  description  String
+  userId       Int
+  user         User          @relation(fields: [userId], references: [id])
+  file         File?         @relation(fields: [fileId], references: [id])
+  tags         Tag[]
+  comments     Comment[]
+  reviewAudits ReviewAudit[]
+  isReviewed   Boolean       @default(false)
+  fileId       Int?
+}
+
+model ReviewAudit {
+  id       Int     @id @default(autoincrement())
+  accept   Boolean
+  comment  String
+  reviewId Int
+  review   Review  @relation(fields: [reviewId], references: [id])
+}
+
+model File {
+  id     Int      @id @default(autoincrement())
+  url    String
+  Review Review[]
+}
+
+model Tag {
+  id       Int    @id @default(autoincrement())
+  name     String
+  value    String
+  reviewId Int
+  review   Review @relation(fields: [reviewId], references: [id])
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  text      String
+  createdAt DateTime @default(now())
+  reviewId  Int
+  review    Review   @relation(fields: [reviewId], references: [id])
+}
