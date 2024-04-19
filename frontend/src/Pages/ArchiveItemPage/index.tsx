@@ -5,6 +5,7 @@ import {
   Select,
   FormControl,
   FormLabel,
+  Input,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import imageTwo from "../../assets/BR_RJANRIO_O2_0_FOT_0184_d0001de0001_page-0001.jpg";
@@ -44,7 +45,8 @@ function ArchiveItemPage() {
   const [selectedOptions, setSelectedOptions] = useState(Array(8).fill(""));
 
   // Função para atualizar a opção selecionada
-  const handleOptionChange = (index, value) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleOptionChange = (index: any, value: any) => {
     const newOptions = [...selectedOptions];
     newOptions[index] = value;
     setSelectedOptions(newOptions);
@@ -57,6 +59,14 @@ function ArchiveItemPage() {
       </Box>
       <Box flex="1">
         <FormControl>
+          <Box>
+            <FormLabel>Data</FormLabel>
+            <Input name="date" type="date" />
+          </Box>
+          <Box>
+            <FormLabel>Titulo</FormLabel>
+            <Input name="title" />
+          </Box>
           {selectedOptions.map((option, index) => (
             <Box key={index} mb={4}>
               <FormLabel>{optionLabels[index]}</FormLabel>
