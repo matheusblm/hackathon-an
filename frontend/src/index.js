@@ -1,24 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Root from './routes/Root';
-import LoginForm from './components/LoginForm';
-import CadastroForm from './components/CadastroForm';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Root from "./routes/Root";
 
 ReactDOM.render(
   <Router>
     <Switch>
-    <Route path="/cadastro">
-         <CadastroForm />
-        </Root>
-        </Root>
-      </Route>
-      <Route exact path="/login">
-        <Root>
-        <Root>
-        <LoginForm />
-      </Route>
+      <Route exact path="/" component={Root} />
     </Switch>
   </Router>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
