@@ -6,7 +6,6 @@ import { TagsModule } from './modules/tags/tags.module';
 import { CommentsModule } from './modules/comments/comments.module';
 import { ReviewAuditsModule } from './modules/review-audits/review-audits.module';
 import { HttpModule } from '@nestjs/axios';
-import { ChatGptModule } from './modules/chat-gpt/chat-gpt.module';
 
 @Module({
   imports: [
@@ -17,7 +16,6 @@ import { ChatGptModule } from './modules/chat-gpt/chat-gpt.module';
     CommentsModule,
     ReviewAuditsModule,
     HttpModule,
-    ChatGptModule,
   ],
   controllers: [],
   providers: [],

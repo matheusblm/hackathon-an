@@ -14,7 +14,11 @@ export class UsersService {
   }
 
   findAll(): Promise<any[]> {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      include: {
+        reviews: true,
+      },
+    });
   }
 
   findOne(id: number): Promise<any> {

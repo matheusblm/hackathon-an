@@ -13,7 +13,7 @@ export class FilesService {
     });
   }
 
-  findAll(): Promise<File[]> {
+  findAll(): Promise<any[]> {
     return this.prisma.file.findMany();
   }
 

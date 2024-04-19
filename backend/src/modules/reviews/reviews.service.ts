@@ -20,19 +20,6 @@ export class ReviewsService {
     });
 
     return review;
-
-    return this.prisma.review.create({
-      data: {
-        ...data,
-        userId,
-      },
-      include: {
-        user: true,
-        file: true,
-        tags: true,
-        comments: true,
-      },
-    });
   }
 
   findAll(): Promise<any> {
